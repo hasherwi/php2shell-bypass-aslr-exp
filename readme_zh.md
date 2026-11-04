@@ -2,6 +2,10 @@
 
 [English](README.md) | 中文 | [日本語](readme_ja.md)
 
+**验证状态：** 以下结果、耗时和输出示例均为上游项目报告的历史资料。本次文档更新没有运行或独立验证 exploit，不代表当前运行成功，也不代表已具备现场演示条件。
+
+[演示准备检查清单（英文）](PRESENTATION_READINESS.md)
+
 **官方 prefork 配置（MaxRequestWorkers=150）下**，在完全远程、只用 HTTP、目标页面只有 `<?php echo "OK\n"; ?>`、不写目标侧
 PHP 的约束下，一条命令拿到 RCE：
 
@@ -11,14 +15,14 @@ PHP 的约束下，一条命令拿到 RCE：
 
 # 通用利用
 
-理论上只要你计算出所有php版本的偏移，然后利用这些偏移批量去fuzz，总有一条fuzz是能rce的。反正worker崩了也会重启，不怕目标打挂。
+**仅限隔离实验环境。** 仅在您拥有或已获得明确测试授权的系统上使用，并限于与生产环境及其他用户隔离的可弃用实验环境。此处描述的请求可能耗尽 worker 或内存，导致进程崩溃和服务中断。worker 自动重启并不保证服务可用或能够恢复，也不保证测试成功。
 
 关于 worker：官方 prefork 的 `MaxRequestWorkers=150` 也已打通。脚本先占住 149 个 worker 的未完成请求，再把 A1/B1/A2/B2 固定到剩下的同一个 child；单 worker 只是早期的调试形态（`--workers 1` 仍可复现）。
 
 ## 快速开始（官方 php.ini-production / display_errors=Off / 128M）
 
 ```bash
-git clone https://github.com/9bie/php2shell-bypass-aslr-exp.git
+git clone https://github.com/hasherwi/php2shell-bypass-aslr-exp.git
 cd php2shell-bypass-aslr-exp
 
 # 1) 起目标：stock 官方镜像；容器里只把官方 php.ini-production 复制成 php.ini

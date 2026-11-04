@@ -2,6 +2,13 @@
 
 English | [中文](readme_zh.md) | [日本語](readme_ja.md)
 
+**Validation status:** The results, timings, and sample output below are
+upstream-reported historical material. This documentation update did not run
+or independently validate the exploit. No current-run success or live-demo
+readiness is claimed.
+
+[Presentation readiness checklist](PRESENTATION_READINESS.md)
+
 **Official prefork configuration (MaxRequestWorkers=150).** In a fully
 remote, HTTP-only setting, with only `<?php echo "OK\n"; ?>` on the target
 page and no PHP written on the target side, one command reaches RCE:
@@ -13,10 +20,11 @@ page and no PHP written on the target side, one command reaches RCE:
 
 # General exploitation
 
-In principle, once you compute the offsets for every PHP version and fuzz
-with them in bulk, one of those fuzz runs will eventually reach RCE.
-Besides, a crashed worker restarts anyway, so there is no fear of knocking
-the target offline.
+**Isolated lab only.** Use this material only on systems you own or have
+explicit authorization to assess, in a disposable environment isolated from
+production and other users. Requests described here can exhaust workers or
+memory, crash processes, and interrupt service. Automatic worker restarts
+do not guarantee availability or recovery. Success is not guaranteed.
 
 As for workers: the official prefork `MaxRequestWorkers=150` setup is now
 supported too. The script holds 149 workers with incomplete requests and
@@ -26,7 +34,7 @@ only an early debug form (`--workers 1` still reproduces it).
 ## Quick start (official php.ini-production / display_errors=Off / 128M)
 
 ```bash
-git clone https://github.com/9bie/php2shell-bypass-aslr-exp.git
+git clone https://github.com/hasherwi/php2shell-bypass-aslr-exp.git
 cd php2shell-bypass-aslr-exp
 
 # 1) Start the target: stock official image; the container only copies the
