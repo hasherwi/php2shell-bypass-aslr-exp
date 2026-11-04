@@ -1,6 +1,6 @@
 # php2shell - 公式環境、display_errors不要、memory_limit変更なし
 
-[中文](README.md) | [English](readme_en.md) | 日本語
+[English](README.md) | [中文](readme_zh.md) | 日本語
 
 **公式 prefork 構成（MaxRequestWorkers=150）下**で、完全にリモート・HTTP のみ・
 対象ページは `<?php echo "OK\n"; ?>` だけ・対象側に PHP を書かないという制約の下、
