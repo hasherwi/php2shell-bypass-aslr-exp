@@ -2,6 +2,11 @@
 
 [English](README.md) | [中文](readme_zh.md) | 日本語
 
+**検証状況：** 以下の結果、所要時間、出力例は、上流プロジェクトが報告した
+過去の資料です。このドキュメント更新では exploit を実行しておらず、独立した
+検証も行っていません。現在の実行の成功やライブデモの準備完了を示すものでは
+ありません。
+
 **公式 prefork 構成（MaxRequestWorkers=150）下**で、完全にリモート・HTTP のみ・
 対象ページは `<?php echo "OK\n"; ?>` だけ・対象側に PHP を書かないという制約の下、
 1 コマンドで RCE を獲得する：
@@ -13,9 +18,11 @@
 
 # 汎用的な利用
 
-理論上、すべての PHP バージョンのオフセットを計算し、それらのオフセットを使って
-一括でファジングすれば、いずれかのファジングは必ず RCE に到達する。どのみち
-worker がクラッシュしても再起動するので、対象を落としてしまう心配もない。
+**隔離された検証環境専用。** 自分が所有するシステム、または明示的な検証許可を
+得たシステムでのみ使用し、本番環境や他の利用者から隔離された使い捨ての環境に
+限定してください。ここで説明するリクエストは worker やメモリを使い尽くし、
+プロセスのクラッシュやサービスの停止を引き起こす可能性があります。worker の
+自動再起動は可用性や復旧を保証しません。成功も保証されません。
 
 worker について：公式 prefork の `MaxRequestWorkers=150` にも対応済み。スクリプトは
 まず 149 個の worker を未完了のリクエストで占有し、残った同一の child に
@@ -25,7 +32,7 @@ A1/B1/A2/B2 を固定する。単一 worker はあくまで初期のデバッグ
 ## クイックスタート（公式 php.ini-production / display_errors=Off / 128M）
 
 ```bash
-git clone https://github.com/9bie/php2shell-bypass-aslr-exp.git
+git clone https://github.com/hasherwi/php2shell-bypass-aslr-exp.git
 cd php2shell-bypass-aslr-exp
 
 # 1) 対象を起動：stock 公式イメージ；コンテナ内では公式の php.ini-production を
