@@ -1,5 +1,7 @@
 # Presentation readiness checklist
 
+English | [中文](PRESENTATION_READINESS_zh.md) | [日本語](PRESENTATION_READINESS_ja.md)
+
 ## Current status
 
 This is a documentation and presentation review, not a runtime validation.
