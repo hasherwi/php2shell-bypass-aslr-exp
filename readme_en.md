@@ -7,6 +7,8 @@ upstream-reported historical material. This documentation update did not run
 or independently validate the exploit. No current-run success or live-demo
 readiness is claimed.
 
+[Presentation readiness checklist](PRESENTATION_READINESS.md)
+
 **Official prefork configuration (MaxRequestWorkers=150).** In a fully
 remote, HTTP-only setting, with only `<?php echo "OK\n"; ?>` on the target
 page and no PHP written on the target side, one command reaches RCE:

@@ -4,6 +4,8 @@
 
 **验证状态：** 以下结果、耗时和输出示例均为上游项目报告的历史资料。本次文档更新没有运行或独立验证 exploit，不代表当前运行成功，也不代表已具备现场演示条件。
 
+[演示准备检查清单（英文）](PRESENTATION_READINESS.md)
+
 **官方 prefork 配置（MaxRequestWorkers=150）下**，在完全远程、只用 HTTP、目标页面只有 `<?php echo "OK\n"; ?>`、不写目标侧
 PHP 的约束下，一条命令拿到 RCE：
 
